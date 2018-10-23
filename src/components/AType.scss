@@ -1,0 +1,42 @@
+.a-type {
+  background: #000;
+  color: #fff;
+  width: 500px;
+
+  .level-selection {
+    margin: 2rem;
+
+    .level-selection-header {
+      display: flex;
+      justify-content: center;
+      margin: 1rem;
+      border: 5px solid crimson;
+
+      h2 {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.level-selection-numbers {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  width: 400px;
+  height: 150px;
+
+  .level-selection-numbers-item {
+    width: 20%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: darkred;
+    font-weight: 600;
+    border: 3px dotted green;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+}

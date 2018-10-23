@@ -1,0 +1,20 @@
+.leaderboard {
+  margin: 2rem;
+
+  table {
+    border: 3px dotted yellow;
+    width: 100%;
+
+    thead {
+      font-size: 2rem;
+
+      .th-name {
+        text-align: center;
+      }
+    }
+
+    tbody {
+      font-size: 1.5rem;
+    }
+  }
+}

@@ -1,0 +1,188 @@
+.game {
+  // display: flex;
+
+  .column-lines-playfield {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .column-scoreboard-next-level {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-header {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .section-text {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
+
+.statistics {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #000;
+  background-color: #000;
+  color: #fff;
+
+  .statistics-row {
+    .counter {
+      font-size: 3vw;
+      color: crimson;
+    }
+  }
+}
+
+.i,
+.t,
+.o {
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .row {
+    display: flex;
+    justify-content: center;
+
+    div {
+      width: 20px;
+      height: 20px;
+      box-sizing: border-box;
+    }
+
+    .fill {
+      box-sizing: border-box;
+      border: 1px solid #000;
+      background-color: #fff;
+    }
+  }
+}
+
+.s,
+.j {
+  margin: 10px auto;
+
+  .row {
+    display: flex;
+    justify-content: center;
+
+    div {
+      width: 20px;
+      height: 20px;
+      box-sizing: border-box;
+    }
+
+    .fill {
+      box-sizing: border-box;
+      border: 1px solid #000;
+      background-color: blueviolet;
+    }
+  }
+}
+
+.l,
+.z {
+  margin: 10px auto;
+
+  .row {
+    display: flex;
+    justify-content: center;
+
+    div {
+      width: 20px;
+      height: 20px;
+      box-sizing: border-box;
+    }
+
+    .fill {
+      box-sizing: border-box;
+      border: 1px solid #000;
+      background-color: red;
+    }
+  }
+}
+
+.lines {
+  background-color: #000;
+  color: #fff;
+  margin: 1rem;
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.playfield {
+  margin: 1rem;
+  border: 1px solid #000;
+
+  .playfield-row {
+    display: flex;
+
+    .cell {
+      width: 25px;
+      height: 25px;
+      border: 1px solid #000;
+      background-color: #000;
+      box-sizing: border-box;
+    }
+
+    .I,
+    .T,
+    .O {
+      background-color: #fff;
+    }
+
+    .S,
+    .J {
+      background-color: blueviolet;
+    }
+
+    .L,
+    .Z {
+      background-color: red;
+    }
+  }
+}
+
+.scoreboard {
+  margin: 1rem;
+  padding: 1rem 2rem;
+  border: 1px solid #000;
+  background-color: #000;
+  color: #fff;
+}
+
+.top-score,
+.current-score {
+  margin-bottom: 1rem;
+}
+
+.next {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #000;
+  background-color: #000;
+  color: #fff;
+
+  .section-header,
+  .section-text {
+    text-align: center;
+  }
+}
+
+.level {
+  margin: 1rem;
+  border: 1px solid #000;
+  background-color: #000;
+  color: #fff;
+
+  .section-header,
+  .section-text {
+    text-align: center;
+  }
+}
