@@ -1,8 +1,8 @@
-import { LOCK_PIECE } from "./types";
+import { SET_ENTRY_DELAY } from "./types";
 
-export const lockPiece = currentPiece => dispatch => {
+export const setEntryDelay = entryDelayFrames => dispatch => {
   dispatch({
-    type: LOCK_PIECE,
-    currentPiece
+    type: SET_ENTRY_DELAY,
+    payload: entryDelayFrames
   });
 };

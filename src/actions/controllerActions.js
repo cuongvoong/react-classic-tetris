@@ -4,7 +4,7 @@ import {
   MOVE_DOWN,
   MOVE_LEFT,
   MOVE_RIGHT,
-  LOCK,
+  LOCK_PIECE,
   ROTATE_CLOCKWISE,
   ROTATE_COUNTERCLOCKWISE
 } from "./types";
@@ -52,7 +52,7 @@ export const down = (playfield, currentPiece) => dispatch => {
     });
   } else {
     dispatch({
-      type: LOCK,
+      type: LOCK_PIECE,
       payload: currentPiece
     });
   }

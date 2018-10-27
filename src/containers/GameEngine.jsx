@@ -10,28 +10,21 @@ import Next from "../components/next/Next";
 import Playfield from "./Playfield";
 import Scoreboard from "../components/scoreboard/Scoreboard";
 import Statistics from "../components/statistics/Statistics";
-import { gameStart } from "../actions/gameStateActions";
+import { gameStart, gameOver } from "../actions/gameStateActions";
 import { generateNextPiece } from "../actions/nextPieceActions";
-import { setCurrentPiece, moveBlock } from "../actions/currentPieceActions";
+import { setCurrentPiece } from "../actions/currentPieceActions";
 import { updatePieceStatistics } from "../actions/statisticsActions";
+import { lockPiece, clearLines } from "../actions/playfieldActions";
+import { setEntryDelay } from "../actions/lockActions";
+import { updateLines } from "../actions/lineActions";
+import { single, double, triple, tetris } from "../actions/scoreActions";
+import { canMove } from "../currentPieceHelper";
+import {
+  calculateFramePerGridCell,
+  calculateEntryDelay
+} from "../gameEngineHelper";
 
 class GameEngine extends Component {
-  constructor(props) {
-    super(props);
-
-    this.moveInterval = null;
-  }
-
-  componentDidMount() {
-    // this.moveInterval = setInterval(() => {
-    //   this.props.moveBlock(this.props.playfield, this.props.currentPiece);
-    // }, (this.calculateFramePerGridCell() / 60) * 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.moveInterval);
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.level !== this.props.level && this.props.level !== null) {
       this.props.gameStart();
@@ -56,23 +49,71 @@ class GameEngine extends Component {
     }
   }
 
-  calculateFramePerGridCell = () => {
-    const { level } = this.props;
-    if (level === 0) return 48;
-    else if (level === 1) return 43;
-    else if (level === 2) return 38;
-    else if (level === 3) return 33;
-    else if (level === 4) return 28;
-    else if (level === 5) return 23;
-    else if (level === 6) return 18;
-    else if (level === 7) return 13;
-    else if (level === 8) return 8;
-    else if (level === 9) return 6;
-    else if (level >= 10 && level <= 12) return 5;
-    else if (level >= 13 && level <= 15) return 4;
-    else if (level >= 16 && level <= 18) return 3;
-    else if (level >= 19 && level <= 28) return 2;
-    else return 1;
+  moveBlock = () => {
+    const { playfield, currentPiece, level } = this.props;
+
+    if (canMove(playfield, currentPiece, 1, 0)) {
+      this.props.moveBlock(currentPiece);
+    } else {
+      if (currentPiece.x + currentPiece.top <= 0) {
+        this.props.gameOver();
+      } else {
+        this.props.lockPiece(currentPiece);
+        const entryDelayFrames = calculateEntryDelay(currentPiece);
+        this.props.setEntryDelay(entryDelayFrames);
+
+        const fullLines = this.calculateLinesCleared();
+        if (fullLines.length !== 0) {
+          this.props.updateLines(fullLines.length);
+          this.props.clearLines(fullLines);
+
+          switch (fullLines.length) {
+            case 1:
+              this.props.single(level);
+              break;
+            case 2:
+              this.props.double(level);
+              break;
+            case 3:
+              this.props.triple(level);
+              break;
+            case 4:
+              this.props.tetris(level);
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    }
+  };
+
+  handleSetNextPiece = () => {
+    const { nextPiece, currentPiece } = this.props;
+
+    this.props.updatePieceStatistics(nextPiece.type);
+    this.props.setCurrentPiece(nextPiece.type);
+    this.props.generateNextPiece(currentPiece);
+  };
+
+  clearLock = () => {
+    this.props.clearLock();
+  };
+
+  calculateLinesCleared = () => {
+    const fullLines = [];
+
+    this.props.playfield.forEach((row, index) => {
+      if (
+        row.every(value => {
+          return value !== 0;
+        })
+      ) {
+        fullLines.push(index);
+      }
+    });
+
+    return fullLines;
   };
 
   render() {
@@ -83,7 +124,8 @@ class GameEngine extends Component {
       nextPiece,
       score,
       lines,
-      statistics
+      statistics,
+      lock
     } = this.props;
 
     return (
@@ -100,9 +142,12 @@ class GameEngine extends Component {
                   <section className="column-lines-playfield">
                     <Lines lines={lines} />
                     <Playfield
-                      level={level}
                       gameState={gameState}
-                      currentPiece={currentPiece}
+                      framesPerGridCell={calculateFramePerGridCell(level)}
+                      onMoveBlock={() => this.moveBlock()}
+                      entryDelayFrames={lock.entryDelayFrames}
+                      onSetNextPiece={() => this.handleSetNextPiece()}
+                      onClearLock={() => this.clearLock()}
                     />
                   </section>
                   <section className="column-scoreboard-next-level">
@@ -130,16 +175,26 @@ const mapStateToProps = state => ({
   nextPiece: state.nextPiece,
   lines: state.lines,
   score: state.score,
-  statistics: state.statistics
+  statistics: state.statistics,
+  playfield: state.playfield,
+  lock: state.lock
 });
 
 export default connect(
   mapStateToProps,
   {
     gameStart,
+    gameOver,
     generateNextPiece,
     setCurrentPiece,
     updatePieceStatistics,
-    moveBlock
+    lockPiece,
+    setEntryDelay,
+    updateLines,
+    clearLines,
+    single,
+    double,
+    triple,
+    tetris
   }
 )(GameEngine);

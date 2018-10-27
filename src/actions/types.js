@@ -5,7 +5,7 @@ export const TRIPLE = "TRIPLE";
 export const TETRIS = "TETRIS";
 
 //Playfield actions
-export const LOCK = "LOCK";
+export const LOCK_PIECE = "LOCK_PIECE";
 export const CLEAR_LINES = "CLEAR_LINES";
 
 //Current Piece actions
@@ -15,7 +15,7 @@ export const MOVE_LEFT = "MOVE_LEFT";
 export const MOVE_RIGHT = "MOVE_RIGHT";
 export const ROTATE_CLOCKWISE = "ROTATE_CLOCKWISE";
 export const ROTATE_COUNTERCLOCKWISE = "ROTATE_COUNTERCLOCKWISE";
-export const MOVE_BLOCK = "MOVE_BLOCK";
+export const DROP_ONE_ROW = "DROP_ONE_ROW";
 
 //Next Piece actions
 export const GENERATE_NEXT_PIECE = "GENERATE_NEXT_PIECE";
@@ -52,4 +52,4 @@ export const UPDATE_PIECE_STATISTICS = "UPDATE_PIECE_STATISTICS";
 export const UPDATE_LINES = "UPDATE_LINES";
 
 //Lock actions
-export const LOCK_PIECE = "LOCK_PIECE";
+export const SET_ENTRY_DELAY = "SET_ENTRY_DELAY";

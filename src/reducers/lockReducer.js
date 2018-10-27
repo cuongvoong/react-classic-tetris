@@ -1,15 +1,17 @@
-import { LOCK_PIECE } from "../actions/types";
+import { SET_ENTRY_DELAY } from "../actions/types";
 
 const initialState = {
   lock: false,
-  row: 19
+  entryDelayFrames: 0
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LOCK_PIECE:
+    case SET_ENTRY_DELAY:
       return {
-        ...state
+        ...state,
+        lock: true,
+        entryDelayFrames: action.payload
       };
     default:
       return state;

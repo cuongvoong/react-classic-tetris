@@ -1,3 +1,10 @@
+export const GAME_STATE = {
+  LevelSelection: 0,
+  Playing: 1,
+  Paused: 2,
+  GameOver: 3
+};
+
 export const KEYBOARD = {
   LEFT: 37,
   UP: 38,
@@ -33,7 +40,8 @@ export const PIECE = {
     spawn: {
       x: -1,
       y: 4
-    }
+    },
+    color: "white"
   },
   J: {
     0: {
@@ -59,7 +67,8 @@ export const PIECE = {
     spawn: {
       x: -1,
       y: 4
-    }
+    },
+    color: "blueviolet"
   },
   Z: {
     0: {
@@ -85,7 +94,8 @@ export const PIECE = {
     spawn: {
       x: -1,
       y: 4
-    }
+    },
+    color: "red"
   },
   O: {
     0: {
@@ -111,7 +121,8 @@ export const PIECE = {
     spawn: {
       x: 0,
       y: 4
-    }
+    },
+    color: "white"
   },
   S: {
     0: {
@@ -137,7 +148,8 @@ export const PIECE = {
     spawn: {
       x: -1,
       y: 4
-    }
+    },
+    color: "blueviolet"
   },
   L: {
     0: {
@@ -163,13 +175,14 @@ export const PIECE = {
     spawn: {
       x: -1,
       y: 4
-    }
+    },
+    color: "red"
   },
   I: {
     0: {
       shape: [[0, 0, 0, 0], [0, 0, 0, 0], ["I", "I", "I", "I"], [0, 0, 0, 0]],
       top: 2,
-      bottom: 3
+      bottom: 2
     },
     90: {
       shape: [[0, 0, "I", 0], [0, 0, "I", 0], [0, 0, "I", 0], [0, 0, "I", 0]],
@@ -179,7 +192,7 @@ export const PIECE = {
     180: {
       shape: [[0, 0, 0, 0], [0, 0, 0, 0], ["I", "I", "I", "I"], [0, 0, 0, 0]],
       top: 2,
-      bottom: 3
+      bottom: 2
     },
     270: {
       shape: [[0, 0, "I", 0], [0, 0, "I", 0], [0, 0, "I", 0], [0, 0, "I", 0]],
@@ -189,7 +202,8 @@ export const PIECE = {
     spawn: {
       x: -2,
       y: 3
-    }
+    },
+    color: "white"
   }
 };
 

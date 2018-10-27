@@ -1,5 +1,4 @@
-import { SET_CURRENT_PIECE, MOVE_BLOCK, LOCK, GAME_OVER } from "./types";
-import { canMove } from "../currentPieceHelper";
+import { SET_CURRENT_PIECE, DROP_ONE_ROW } from "./types";
 
 export const setCurrentPiece = pieceType => dispatch => {
   dispatch({
@@ -8,22 +7,9 @@ export const setCurrentPiece = pieceType => dispatch => {
   });
 };
 
-export const moveBlock = (playfield, currentPiece) => dispatch => {
-  if (canMove(playfield, currentPiece, 1, 0)) {
-    dispatch({
-      type: MOVE_BLOCK,
-      payload: currentPiece
-    });
-  } else {
-    if (currentPiece.x === 0) {
-      dispatch({
-        type: GAME_OVER
-      });
-    } else {
-      dispatch({
-        type: LOCK,
-        payload: currentPiece
-      });
-    }
-  }
+export const dropOneRow = currentPiece => dispatch => {
+  dispatch({
+    type: DROP_ONE_ROW,
+    payload: currentPiece
+  });
 };

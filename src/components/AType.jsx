@@ -8,6 +8,7 @@ import { setLevel } from "../actions/levelActions";
 class AType extends Component {
   handleLevelClick = level => {
     this.props.setLevel(level);
+    this.props.onGameStart();
   };
 
   render() {

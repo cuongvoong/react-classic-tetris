@@ -1,15 +1,15 @@
-import { CLEAR_LINES } from "../actions/types";
+import { CLEAR_LINES, LOCK_PIECE } from "../actions/types";
 
-export const clearLines = (playfield, fullLines) => dispatch => {
-  const newPlayfield = [
-    ...Array(fullLines.length).fill(Array(10).fill(0)),
-    ...playfield.filter((_, index) => {
-      return fullLines.indexOf(index) === -1;
-    })
-  ];
-
+export const clearLines = fullLines => dispatch => {
   dispatch({
     type: CLEAR_LINES,
-    payload: newPlayfield
+    payload: fullLines
+  });
+};
+
+export const lockPiece = currentPiece => dispatch => {
+  dispatch({
+    type: LOCK_PIECE,
+    payload: currentPiece
   });
 };

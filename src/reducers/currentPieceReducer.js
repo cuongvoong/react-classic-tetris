@@ -3,7 +3,7 @@ import {
   MOVE_LEFT,
   MOVE_RIGHT,
   MOVE_DOWN,
-  MOVE_BLOCK,
+  DROP_ONE_ROW,
   ROTATE_CLOCKWISE,
   ROTATE_COUNTERCLOCKWISE
 } from "../actions/types";
@@ -50,7 +50,7 @@ export default (state = initialState, action) => {
         x: state.x + 1
       };
 
-    case MOVE_BLOCK:
+    case DROP_ONE_ROW:
       return {
         ...state,
         x: state.x + 1
@@ -63,7 +63,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         rotation: clocwiseRotation,
-        shape: PIECE[action.payload.type][clocwiseRotation].shape
+        shape: PIECE[action.payload.type][clocwiseRotation].shape,
+        top: PIECE[action.payload.type][clocwiseRotation].top,
+        bottom: PIECE[action.payload.type][clocwiseRotation].bottom
       };
 
     case ROTATE_COUNTERCLOCKWISE:
@@ -73,7 +75,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         rotation: counterClocwiseRotation,
-        shape: PIECE[action.payload.type][counterClocwiseRotation].shape
+        shape: PIECE[action.payload.type][counterClocwiseRotation].shape,
+        top: PIECE[action.payload.type][counterClocwiseRotation].top,
+        bottom: PIECE[action.payload.type][counterClocwiseRotation].bottom
       };
 
     default:

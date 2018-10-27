@@ -1,10 +1,10 @@
-import { LOCK, CLEAR_LINES } from "../actions/types";
+import { LOCK_PIECE, CLEAR_LINES, ANIMATE_CLEAR_LINES } from "../actions/types";
 
 const initialState = Array(20).fill(Array(10).fill(0));
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LOCK:
+    case LOCK_PIECE:
       const stateWithCurrentPiece = [];
 
       //For every row in the grid
@@ -43,11 +43,13 @@ export default (state = initialState, action) => {
       return stateWithCurrentPiece;
 
     case CLEAR_LINES:
-      return {
-        ...state,
-        grid: action.payload
-      };
-
+      const newPlayfield = [
+        ...Array(action.payload.length).fill(Array(10).fill(0)),
+        ...state.filter((_, index) => {
+          return action.payload.indexOf(index) === -1;
+        })
+      ];
+      return newPlayfield;
     default:
       return state;
   }

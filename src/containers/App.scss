@@ -1,3 +1,11 @@
+.game-wrapper {
+  display: flex;
+}
+
+.column-statistics {
+  display: flex;
+}
+
 .game {
   // display: flex;
 
@@ -118,7 +126,6 @@
 
 .playfield {
   margin: 1rem;
-  border: 1px solid #000;
 
   .playfield-row {
     display: flex;

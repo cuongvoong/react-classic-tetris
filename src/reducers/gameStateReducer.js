@@ -1,31 +1,23 @@
 import { START_BUTTON, GAME_START, GAME_OVER } from "../actions/types";
+import { GAME_STATE } from "../constants";
 
-const initialState = {
-  running: false,
-  paused: false,
-  over: false
-};
+const initialState = GAME_STATE.LevelSelection;
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case START_BUTTON:
-      return {
-        ...state,
-        running: true,
-        paused: state.running ? !state.paused : false
-      };
-
+      if (state === GAME_STATE.Playing) {
+        return GAME_STATE.Paused;
+      }
+      if (state === GAME_STATE.Paused) {
+        return GAME_STATE.Playing;
+      }
+      return state;
     case GAME_START:
-      return {
-        ...state,
-        running: true
-      };
+      return GAME_STATE.Playing;
 
     case GAME_OVER:
-      return {
-        ...state,
-        over: true
-      };
+      return GAME_STATE.GameOver;
     default:
       return state;
   }
