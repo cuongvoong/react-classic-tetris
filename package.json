@@ -2,8 +2,10 @@
   "name": "tetris",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://cuongvoong.github.io/react-classic-tetris",
   "dependencies": {
     "classnames": "^2.2.6",
+    "gh-pages": "^2.0.1",
     "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",
     "react": "^16.5.2",
@@ -17,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
